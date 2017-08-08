@@ -5,7 +5,7 @@ import os
 from werkzeug.debug import DebuggedApplication
 
 from app import app
-from gunicorn_app import GunicornApp
+from resources.gunicorn_app import GunicornApp
 
 
 @click.command(
@@ -104,6 +104,8 @@ def run_gunicorn_app(host, port, debug, **settings):
     settings['bind'] = '{}:{}'.format(host, port)
 
     if debug:
+        app.jinja_env.auto_reload = True
+        app.config['TEMPLATES_AUTO_RELOAD'] = True
         settings.update({'loglevel': 'debug',
                          'reload': True,
                          'threads': 1,
