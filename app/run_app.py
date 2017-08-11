@@ -9,8 +9,6 @@ from resources.gunicorn_app import GunicornApp
 
 
 @click.command(
-    'run',
-    short_help='Start serving application from Gunicorn.',
     context_settings={
         'allow_extra_args': True,
         'ignore_unknown_options': True,
@@ -92,6 +90,12 @@ from resources.gunicorn_app import GunicornApp
           "Defaults to '127.0.0.1'.")
 )
 def run_gunicorn_app(host, port, debug, **settings):
+    """Serve Flask application using Gunicorn.
+
+    The Flask application and respective resources and endpoints should
+    defined in `app.py` in this same directory.
+    """
+
     logging.basicConfig(level='DEBUG' if debug else 'INFO')
 
     # Set a global flag that indicates that we were invoked from the
