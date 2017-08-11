@@ -2,11 +2,11 @@ from gunicorn.app.base import BaseApplication
 
 
 class GunicornApp(BaseApplication):
-    """Convert a flask application to a gunicorn one.
+    """Convert a Flask application to a Gunicorn one.
     """
 
     def __init__(self, flask_app, settings=None):
-        """Initialize GunicornClass.
+        """Initialize GunicornApp.
 
         If no settings are provided the class is initialized using the
         documented default parameters in
