@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form class="remove-empty-values" enctype="multipart/form-data" action="/car/profile-fit/results">
+<form method="post" class="remove-empty-values" enctype="multipart/form-data" action="/output-example">
 
   <h3>Title</h3>
 
@@ -29,7 +29,7 @@
 
   <div class="form-group">
     <label for="data_list">Data list with suggestion:</label>
-    <input list="browsers" id="data_list">
+    <input list="browsers" id="data_list" name="data_list">
     <datalist id="browsers">
       {% for o in data_list %}
         <option value="{{ o.country }}">
@@ -40,20 +40,24 @@
   <div class="checkbox">
     <label><input type="checkbox" name="checkbox" id="checkbox" />Checkbox</label>
   </div>
+
   <label for="radio_buttons">Radio Buttons</label>
   <div class="radio" id="radio_buttons">
     <label class="radio-inline"><input type="radio" name="radio_button" value="option_1">Option 1</label>
     <label class="radio-inline"><input type="radio" name="radio_button" value="option_2">Option 2</label>
     <label class="radio-inline"><input type="radio" name="radio_button" value="option_3">Option 3</label>
   </div>
+
   <div class="form-group">
     <label for="slider">Slider</label>
-    <input type="range" name="points" min=0 max=10 step=2 id="slider" value=0>
+    <input type="range" name="slider" min=0 max=10 step=2 id="slider" value=0>
   </div>
+
   <div class="form-group">
     <label for="comment_field">Comment Field</label>
     <textarea class="form-control" rows="3" name="comment_field" id="comment_field"></textarea>
   </div>
+
   <div class="form-group">
     <label>Credentials</label>
     <div class="input-group">
@@ -65,8 +69,17 @@
       <input type="password" name="password" id="password" class="form-control" placeholder="Password"/>
     </div>
   </div>
+
   <br></br>
   <button type="submit" class="btn btn-primary">Submit Button</button>
 
 </form>
+<script type="text/javascript">
+  $(document).ready(function() {
+  $('.remove-empty-values').submit(function() {
+    $(this).find(':input').filter(function() { return !this.value; }).attr('disabled', 'disabled');
+    return true; // make sure that the form is still submitted
+  });
+});
+</script>
 {% endblock %}
