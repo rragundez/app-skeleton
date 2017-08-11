@@ -1,8 +1,8 @@
 # app-skeleton
 
-Skeleton of a Flask application which can be used in production.
+Skeleton of a Flask application which can be use in production.
 
-###Contents
+### Contents
 
  - Flask application template in `app/app.py`.
  - Input form with different input types examples `app/templates/input.html`.
@@ -10,7 +10,7 @@ Skeleton of a Flask application which can be used in production.
  - Example class which handles the form submission `app/resources/form_submitter.py`.
  - Function handling Gunicorn command line arguments `app/run_app.py`.
  - Folder with all necessary files for putting the application into a Docker container.
- - Basic example of running a model based in user inputs and showing results in a pandas DataFrame as html.
+ - Example of running a prediction model based on user input and serving results in a pandas DataFrame as html.
  
 ### Run application
 To run the application execute the command
