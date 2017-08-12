@@ -6,29 +6,28 @@ LABEL description=""
 LABEL version=""
 LABEL maintainer=""
 
-# define project variables
-ENV APPLICATION_NAME dummy_application
-ENV PACKAGE_NAME dummypackage
-ENV VIRTUAL_ENVIRONMENT conda_environment_name
+# in the paths below substitute paths with your own
+# substitue:
+#  - app-skeleton (application name)
+#  - dummypackage (own package name)
+#  - conda_env (name of conda environment in environment_docker.yml)
 
 # create virtual environment and clean leftovers
-COPY docker/environment_docker.yml /$APPLICATION_NAME/environment_docker.yml
-RUN conda env create -f /$APPLICATION_NAME/environment_docker.yml && \
+COPY docker/environment_docker.yml /app-skeleton/environment_docker.yml
+RUN conda env create -f /app-skeleton/environment_docker.yml && \
     conda clean --tarballs --packages -y
 
 # copy application directory to container
-COPY app /$APPLICATION_NAME/app
+COPY app /app-skeleton/app
 
 # copy package directory to container
-COPY $PACKAGE_NAME /$APPLICATION_NAME/$PACKAGE_NAME
+COPY dummypackage /app-skeleton/dummypackage
 
 # port to run application on
-ARG port=5000
+ARG port
 EXPOSE $port
 
 # add package to python's path
-ENV PYTHONPATH $PYTHONPATH:/$APPLICATION_NAME/$PACKAGE_NAME
-ENV FLASK_APP /$APPLICATION_NAME/app/app.py
+ENV PYTHONPATH $PYTHONPATH:/app-skeleton/dummypackage
 
-ENTRYPOINT ["/opt/conda/envs/$VIRTUAL_ENVIRONMENT/bin/python", "/$APPLICATION_NAME/app/app.py"]
-CMD ["--host", "127.0.0.1", "--port", $port, "--workers", "1", "--threads", "1", "--log-level", "debug"]
+ENTRYPOINT ["/opt/conda/envs/conda_env/bin/python", "/app-skeleton/app/run_app.py"]

@@ -1,0 +1,33 @@
+name: conda_env
+channels:
+- conda-forge
+- defaults
+dependencies:
+- aniso8601=1.2.0=py36_0
+- flask-restful=0.3.6=py36_0
+- pycrypto=2.6.1=py36_1
+- click=6.7=py36_0
+- flask=0.12.2=py36_0
+- itsdangerous=0.24=py36_0
+- jinja2=2.9.6=py36_0
+- markupsafe=0.23=py36_2
+- mkl=2017.0.3=0
+- numpy=1.13.1=py36_0
+- openssl=1.0.2l=0
+- pandas=0.20.3=py36_0
+- pip=9.0.1=py36_1
+- python=3.6.2=0
+- python-dateutil=2.6.1=py36_0
+- pytz=2017.2=py36_0
+- readline=6.2=2
+- setuptools=27.2.0=py36_0
+- six=1.10.0=py36_0
+- sqlite=3.13.0=0
+- tk=8.5.18=0
+- werkzeug=0.12.2=py36_0
+- wheel=0.29.0=py36_0
+- xz=5.2.2=1
+- zlib=1.2.8=3
+- pip:
+  - gunicorn==19.7.1
+  - passlib==1.7.1
