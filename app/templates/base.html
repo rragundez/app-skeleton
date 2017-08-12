@@ -30,12 +30,10 @@
         </ul>
         <div class="tab-content">
           <div id="tab0" class="tab-pane fade in active">
-            <h3>Tab 0</h3>
-            <p>Lorem ipsum.</p>
+            {% block content_tab0 %}{% endblock %}
           </div>
           <div id="tab1" class="tab-pane fade">
-            <h3>Tab 1</h3>
-            <p>Ut enim.</p>
+            {% block content_tab1 %}{% endblock %}
           </div>
         </div>
       </div>
