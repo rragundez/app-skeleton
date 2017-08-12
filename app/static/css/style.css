@@ -1,0 +1,9 @@
+.nav-pills>li.active>a,
+.nav-pills>li.active>a:focus,
+.nav-pills>li.active>a:hover {
+    color: #fff;
+    background-color: #4C9EA9;
+}
+.nav-pills>li>a {
+  color: #4C9EA9;
+}

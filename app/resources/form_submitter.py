@@ -1,5 +1,6 @@
 import datetime as dt
 
+import numpy as np
 import pandas as pd
 
 from flask import render_template
@@ -7,6 +8,8 @@ from flask import Response
 from flask_restful import Resource
 from flask_restful import reqparse
 from passlib.hash import pbkdf2_sha256
+
+from resources.utils import pandas_plot_to_html
 
 
 class FormSubmitter(Resource):
@@ -35,7 +38,8 @@ class FormSubmitter(Resource):
                          resource_class_kwargs=some_dictionary)
     """
 
-    def __init__(self, extra_0, **kwargs):
+    def __init__(self, select_list_options, data_list_options,
+                 radio_buttons_options, **kwargs):
         self.parser = reqparse.RequestParser()
         self.parser.add_argument('text_field')
         self.parser.add_argument('number_field', type=int)
@@ -45,24 +49,53 @@ class FormSubmitter(Resource):
         )
         self.parser.add_argument('select_list')
         self.parser.add_argument('data_list')
-        self.parser.add_argument('checkbox', default=False)
+        self.parser.add_argument('checkbox', default=False,
+                                 type=lambda x: True if x == 'on' else False)
         self.parser.add_argument('radio_button')
         self.parser.add_argument('slider', type=int)
         self.parser.add_argument('comment_field')
         self.parser.add_argument('email')
         self.parser.add_argument('password', type=pbkdf2_sha256.hash)
-        self.kwargs = kwargs
-
+        self.user_inputs = {k: v
+                            for k, v in self.parser.parse_args().items()
+                            if v is not None}
+        self.select_list = select_list_options
+        self.data_list = data_list_options
+        self.radio_buttons = radio_buttons_options
         super().__init__()
+
+    def get(self):
+        res = Response(
+            render_template('base.html',
+                            left_panel='input_example.html',
+                            tab_0='dataframe.html',
+                            tab_1='plot.html',
+                            select_list_options=self.select_list,
+                            data_list_options=self.data_list,
+                            radio_buttons_options=self.radio_buttons)
+        )
+        return res
 
     def post(self):
         """Method to execute for a post request.
         """
-        args = dict(self.parser.parse_args())
-        args.update(self.kwargs)
-        df = pd.DataFrame(args, index=['value']).T
-        res = Response(render_template("dataframe.html",
-                                       data=df.to_html(),
-                                       title="Results title"),
-                       status=200)
+        inputs = pd.DataFrame(self.user_inputs, index=['value']).T
+
+        df = pd.DataFrame(np.random.rand(10, 4), columns=['a', 'b', 'c', 'd'])
+        img = pandas_plot_to_html(df.plot.area(stacked=False))
+
+        res = Response(
+            render_template("base.html",
+                            left_panel='input_example.html',
+                            tab_0='dataframe.html',
+                            tab_1='plot.html',
+                            select_list_options=self.select_list,
+                            data_list_options=self.data_list,
+                            radio_buttons_options=self.radio_buttons,
+                            dataframe_title="User's input",
+                            dataframe=inputs.to_html(),
+                            plot_title="Some random plot",
+                            plot=img,
+                            **self.user_inputs),
+            status=200)
         return res

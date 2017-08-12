@@ -1,0 +1,93 @@
+<form method="post" class="remove-empty-values" enctype="multipart/form-data" action="/">
+
+  <h3>Form title</h3>
+
+  <div class="form-group">
+    <input type="text" name="text_field" id="text_field" class="form-control" placeholder="Text field" value="{{ text_field }}"/>
+  </div>
+
+  <div class="form-group">
+    <input type="number" name="number_field" id="number_field" class="form-control" placeholder="Number field" value="{{ number_field }}"/>
+  </div>
+
+  <div class="form-group">
+    <label for="date_field">Date Field</label>
+    <input type="date" name="date_field" id="date_field" class="form-control" value="{{ date_field }}"/>
+  </div>
+
+  <div class="form-group">
+  <label for="sel1">Select list:</label>
+    <select class="form-control" name="select_list" id="select_list">
+      {% for o in select_list_options %}
+        {% if o.key == select_list %}
+          <option value="{{ o.key }}" selected>{{ o.key }}</option>
+        {% else %}
+          <option value="{{ o.key }}">{{ o.key }}</option>
+        {% endif %}
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="data_list">Data list with suggestion:</label>
+    <input list="browsers" id="data_list" name="data_list" value="{{ data_list }}">
+    <datalist id="browsers">
+      {% for o in data_list_options %}
+        <option value="{{ o.country }}">
+      {% endfor %}
+    </datalist>
+  </div>
+
+  <div class="checkbox">
+    {% if checkbox == True %}
+      <label><input type="checkbox" name="checkbox" id="checkbox" checked/>Checkbox</label>
+    {% else %}
+      <label><input type="checkbox" name="checkbox" id="checkbox" />Checkbox</label>
+    {% endif %}
+  </div>
+
+  <label for="radio_buttons">Radio Buttons</label>
+  <div class="radio" id="radio_buttons">
+    {% for o in radio_buttons_options %}
+      {% if o == radio_button %}
+        <label class="radio-inline"><input type="radio" name="radio_button" value="{{ o }}" checked>{{ o }}</label>
+      {% else %}
+        <label class="radio-inline"><input type="radio" name="radio_button" value="{{ o }}">{{ o }}</label>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="form-group">
+    <label for="slider">Slider</label>
+    <input type="range" name="slider" min=0 max=10 step=2 id="slider" value="{{ slider }}">
+  </div>
+
+  <div class="form-group">
+    <label for="comment_field">Comment Field</label>
+    <textarea class="form-control" rows="3" name="comment_field" id="comment_field" value=>{{ comment_field }}</textarea>
+  </div>
+
+  <div class="form-group">
+    <label>Credentials</label>
+    <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <input id="email" type="email" class="form-control" name="email" placeholder="Email" value="{{ email }}">
+    </div>
+     <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+      <input type="password" name="password" id="password" class="form-control" placeholder="Password"/>
+    </div>
+  </div>
+
+  <br></br>
+  <button type="submit" class="btn btn-primary" style="background-color:#F9AD19;">Submit Button</button>
+  <br></br>
+</form>
+<script type="text/javascript">
+  $(document).ready(function() {
+  $('.remove-empty-values').submit(function() {
+    $(this).find(':input').filter(function() { return !this.value; }).attr('disabled', 'disabled');
+    return true; // make sure that the form is still submitted
+  });
+});
+</script>
