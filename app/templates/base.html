@@ -21,7 +21,7 @@
     </div>
     <div class="container-fluid">
       <div class="col-sm-3" style="background-color:#4C9EA9;">
-        {% block left_panel %}{% endblock %}
+        {% include 'input_example.html' %}
       </div>
       <div class="col-sm-9">
         <ul class="nav nav-pills">
@@ -30,10 +30,11 @@
         </ul>
         <div class="tab-content">
           <div id="tab0" class="tab-pane fade in active">
-            {% block content_tab0 %}{% endblock %}
+            {% include 'dataframe.html' %}
           </div>
           <div id="tab1" class="tab-pane fade">
-            {% block content_tab1 %}{% endblock %}
+            <h3>{{ plot_title }}</h3>
+            {{ plot | safe }}
           </div>
         </div>
       </div>
