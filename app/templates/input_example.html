@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block left_panel %}
 <form method="post" class="remove-empty-values" enctype="multipart/form-data" action="/output-example">
 
-  <h3>Title</h3>
+  <h3>Form title</h3>
 
   <div class="form-group">
     <input type="text" name="text_field" id="text_field" class="form-control" placeholder="Text fie"/>
@@ -71,8 +71,8 @@
   </div>
 
   <br></br>
-  <button type="submit" class="btn btn-primary">Submit Button</button>
-
+  <button type="submit" class="btn btn-primary" style="background-color:#F9AD19;">Submit Button</button>
+  <br></br>
 </form>
 <script type="text/javascript">
   $(document).ready(function() {
