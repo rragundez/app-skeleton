@@ -1,9 +1,38 @@
 .nav-pills>li.active>a,
 .nav-pills>li.active>a:focus,
 .nav-pills>li.active>a:hover {
-    color: #fff;
-    background-color: #4C9EA9;
+  color: #fff;
+  background-color: #DD4814;
 }
 .nav-pills>li>a {
-  color: #4C9EA9;
+  color: #DD4814;
+}
+
+body {
+  font-family: Ubuntu, "times new roman", times, roman, serif;
+}
+
+.left-panel {
+  color: white;
+  background-color: #772953;
+}
+
+.btn-primary,
+.btn-primary:visited {
+  background-color:#E95420;
+  border-color:#E95420;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:active:focus,
+.btn-primary.active{
+  background-color:#EB6536;
+  border-color:#EB6536;
+}
+
+a.title:link,
+a.title:visited,
+a.title:hover {
+  color: #333333 ;
 }
