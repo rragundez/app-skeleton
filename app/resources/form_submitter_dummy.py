@@ -12,7 +12,7 @@ from passlib.hash import pbkdf2_sha256
 from resources.utils import pandas_plot_to_html
 
 
-class FormSubmitter(Resource):
+class FormSubmitterDummy(Resource):
     """Resource class to handle the a post or get request.
 
     In order to use this class together with an html input form, the
@@ -66,8 +66,8 @@ class FormSubmitter(Resource):
 
     def get(self):
         res = Response(
-            render_template('base.html',
-                            left_panel='input_example.html',
+            render_template('dummy.html',
+                            left_panel='input_dummy.html',
                             tab_0='dataframe.html',
                             tab_1='plot.html',
                             select_list_options=self.select_list,
@@ -82,11 +82,11 @@ class FormSubmitter(Resource):
         inputs = pd.DataFrame(self.user_inputs, index=['value']).T
 
         df = pd.DataFrame(np.random.rand(10, 4), columns=['a', 'b', 'c', 'd'])
-        img = pandas_plot_to_html(df.plot.area(stacked=False))
+        img = pandas_plot_to_html(df.plot.area(stacked=False).get_figure())
 
         res = Response(
-            render_template("base.html",
-                            left_panel='input_example.html',
+            render_template("dummy.html",
+                            left_panel='input_dummy.html',
                             tab_0='dataframe.html',
                             tab_1='plot.html',
                             select_list_options=self.select_list,

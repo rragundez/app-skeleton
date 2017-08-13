@@ -2,18 +2,17 @@ import base64
 import io
 
 
-def pandas_plot_to_html(pd_plot, img_format='png'):
-    """Convert a pandas plot object to an html element
+def pandas_plot_to_html(fig, img_format='png'):
+    """Convert a matplotlib figure object to an html element
 
     Args:
-        pd_plot: Pandas plot object.
+        fig (matplotlib.figure.Figure): Figure to be plotted.
         img_format (str): Format of the image ot produce.
 
     Returns:
-        An html img element.
+        str: An html img element containig the figure sent.
     """
     img = io.BytesIO()
-    fig = pd_plot.get_figure()
     fig.set_tight_layout(True)
     fig.savefig(img, format=img_format)
     img_str = base64.b64encode(img.getvalue()).decode()
