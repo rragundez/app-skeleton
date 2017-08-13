@@ -80,7 +80,7 @@ class FormSubmitterIris(Resource):
                             probabilities=probabilities.to_html(),
                             plot_title="Features importance with SD",
                             plot=img,
-                            dataframe_title='Confusion matrix',
+                            dataframe_title='Confusion matrix on test set',
                             dataframe=self.confusion_matrix.to_html(),
                             **self.user_inputs),
             status=200)
