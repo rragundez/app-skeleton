@@ -69,8 +69,8 @@ def get_feature_importances_fig(clf, f_importance, top=5):
                  axis=0)
 
     fig = plt.figure()
-    plt.bar(range(len(indices)), importances_value[indices],
-            color="r", yerr=std[indices], align="center")
+    plt.bar(range(len(indices)), importances_value[indices], color="#AEA79F",
+            yerr=std[indices], ecolor="#DD4814", align="center")
     plt.xticks(range(len(indices)), importances_name[indices],
                rotation=45)
     plt.xlim([-1, len(indices)])
