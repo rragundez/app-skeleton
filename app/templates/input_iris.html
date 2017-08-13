@@ -1,0 +1,36 @@
+<form method="post" class="remove-empty-values" enctype="multipart/form-data" action="/iris-wizard">
+
+  <h3>Flower features</h3>
+
+  <div class="form-group">
+    <label>Petal length (cm)</label>
+    <input type="number" step="any" name="petal_length_cm" class="form-control" placeholder="Petal length" value="{{ petal_length_cm }}" required/>
+  </div>
+
+  <div class="form-group">
+    <label>Petal width (cm)</label>
+    <input type="number" step="any" name="petal_width_cm" class="form-control" placeholder="Petal width" value="{{ petal_width_cm }}" required/>
+  </div>
+
+  <div class="form-group">
+    <label>Sepal length (cm)</label>
+    <input type="number" step="any" name="sepal_length_cm" class="form-control" placeholder="Sepal length" value="{{ sepal_length_cm }}" required/>
+  </div>
+
+  <div class="form-group">
+    <label>Sepal width (cm)</label>
+    <input type="number" step="any" name="sepal_width_cm" class="form-control" placeholder="Sepal width" value="{{ sepal_width_cm }}" required/>
+  </div>
+
+  <br></br>
+  <button type="submit" class="btn btn-primary">Abrakadabra</button>
+  <br></br>
+</form>
+<script type="text/javascript">
+  $(document).ready(function() {
+  $('.remove-empty-values').submit(function() {
+    $(this).find(':input').filter(function() { return !this.value; }).attr('disabled', 'disabled');
+    return true; // make sure that the form is still submitted
+  });
+});
+</script>

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Iris Wizard{% endblock %}
+{% block tabs_headers %}
+  <li class="active"><a data-toggle="pill" href="#tab0">Prediction</a></li>
+  <li><a data-toggle="pill" href="#tab1">Insights</a></li>
+  <li><a data-toggle="pill" href="#tab2">Performance</a></li>
+{% endblock %}
+{% block tabs_content %}
+  <div id="tab0" class="tab-pane fade in active">
+    {% include tab_0 %}
+  </div>
+  <div id="tab1" class="tab-pane fade">
+    {% include tab_1 %}
+  </div>
+  <div id="tab2" class="tab-pane fade">
+    {% include tab_2 %}
+  </div>
+{% endblock %}
+
