@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Dummy App{% endblock %}
+{% block tabs_headers %}
+  <li class="active"><a data-toggle="pill" href="#tab0">Tab 0</a></li>
+  <li><a data-toggle="pill" href="#tab1">Tab 1</a></li>
+{% endblock %}
+{% block tabs_content %}
+  <div id="tab0" class="tab-pane fade in active">
+    {% include tab_0 %}
+  </div>
+  <div id="tab1" class="tab-pane fade">
+    {% include tab_1 %}
+  </div>
+{% endblock %}
+
+
