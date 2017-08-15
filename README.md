@@ -22,7 +22,13 @@ As you can see in the pictures I use the typical [shiny](https://shiny.rstudio.c
  - Function which runs a Flask application using Gunicorn, and handles multiple command line arguments `app/run_app.py`.
  - Folder with all necessary files for putting the application into a Docker container `docker`.
 
-### Run application
+## Run application
+
+First install the `dummypackage` by executing:
+```bash
+python setup.py install
+```
+
 To run the application execute the command
 ```bash
 python run_app.py [Options]
