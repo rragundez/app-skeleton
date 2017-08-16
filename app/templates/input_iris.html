@@ -2,6 +2,9 @@
 
   <h3>Flower features</h3>
 
+  <!-- we add this hidden input to recognize that the post request is coming from the html input form -->
+  <input type="hidden" name="return_html" value="true" />
+
   <div class="form-group">
     <label>Petal length (cm)</label>
     <input type="number" step="any" name="petal_length_cm" class="form-control" placeholder="Petal length" value="{{ petal_length_cm }}" required/>

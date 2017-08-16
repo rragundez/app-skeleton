@@ -41,9 +41,12 @@ class FormSubmitterIris(Resource):
         self.parser.add_argument('petal_width_cm', type=float)
         self.parser.add_argument('sepal_length_cm', type=float)
         self.parser.add_argument('sepal_width_cm', type=float)
+        self.parser.add_argument('return_html', type=bool, default=False)
+        args = self.parser.parse_args()
+        self.return_html = args['return_html']
         self.user_inputs = {k: v
-                            for k, v in self.parser.parse_args().items()
-                            if v is not None}
+                            for k, v in args.items()
+                            if v is not None and k is not 'return_html'}
         self.model = model
         self.features = features
         self.confusion_matrix = confusion_matrix
@@ -69,26 +72,36 @@ class FormSubmitterIris(Resource):
         prediction, probabilities = self.predict()
         probabilities = probabilities.T
         probabilities.columns = ['Probabilities']
-
-        res = Response(
-            render_template("iris.html",
-                            left_panel='input_iris.html',
-                            tab_0='classification.html',
-                            tab_1='plot.html',
-                            tab_2='dataframe.html',
-                            prediction_label=prediction.title(),
-                            probabilities=probabilities.to_html(),
-                            plot_title="Features importance with SD",
-                            plot=img,
-                            dataframe_title='Confusion matrix on test set',
-                            dataframe=self.confusion_matrix.to_html(),
-                            **self.user_inputs),
-            status=200)
+        # different response depending if coming from UI or from
+        # a post request command
+        if self.return_html:
+            res = Response(
+                render_template("iris.html",
+                                left_panel='input_iris.html',
+                                tab_0='classification.html',
+                                tab_1='plot.html',
+                                tab_2='dataframe.html',
+                                prediction_label=prediction.title(),
+                                probabilities=probabilities.to_html(),
+                                plot_title="Features importance with SD",
+                                plot=img,
+                                dataframe_title='Confusion matrix on test set',
+                                dataframe=self.confusion_matrix.to_html(),
+                                **self.user_inputs),
+                status=200)
+        else:
+            res = prediction
         return res
 
     def predict(self):
+        """Make prediction using the trained model.
+
+        Returns:
+            The single prediction based on inputs and the probability
+            of each class.
+        """
         observation = pd.DataFrame(self.user_inputs, index=[0])
         prediction = self.model.predict(observation)
         probabilities = self.model.predict_proba(observation)
         prob = pd.DataFrame(probabilities, columns=self.model.classes_)
-        return prediction[0], prob
+        return prediction[0].strip(), prob
