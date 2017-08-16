@@ -1,10 +1,14 @@
 # app-skeleton
 
 Python application example which can be run in production by using Gunicorn.
- 
-There are two examples, the first is just a dummy example of how to ingest a user's input of different types. The second example runs an Iris flower classifier to predict the type of flower depending on input from a html form, it also provides some extra output related to the model.
 
-The idea is to use these examples to easily create an application using your python package.
+I am NOT a software developer nor do I want to be one. I think this skeleton can help transition from a machine learning model into a machine learning application, where end users (not data scientist or analysts) can actually make effective use of your model advice.
+
+The application demonstrates several uses, just pick and choose the parts depending on your specifications. Perhaps you are not interested in having a UI, then the endpoint example in the iris case (check the section **Model prediction example**) together with the Gunicorn extension of the Flask app is what you need.
+
+There are two examples, the first is just a dummy example of how to ingest a user's input of different types. The second example runs a classifier which predicts the type of iris flower depending on input from a html form, it also provides some extra output related to the model used.
+
+The idea is to use these examples to easily customize your own python application. 
 
 As you can see in the pictures I use the typical [shiny](https://shiny.rstudio.com/) layout, which in my opinion, is very practical for small machine learning applications.
 
@@ -36,6 +40,8 @@ python run_app.py [Options]
 where `Options` are a few of Gunicorn's possible optional settings. To see which settings can be specified execute `python app/run_app.py --help`. Except for the `--debug` argument (more in the **Run in debug mode** section), all others have a one-to-one relationship with a Gunicorn setting.
 
 By default if running without options `python run_app.py`, `loglevel` will be set to `info`, `workers` and `threads` to `1`, and the application will be hosted in `localhost` under `port` `5000`.
+
+**Note if running in production**: Check out the different options, specially, workers, workers type, threads, access log, error log and daemon mode.
 
 [Here](http://docs.gunicorn.org/en/stable/settings.html) is a list of all Gunicorn's settings, including the default values.
 
@@ -94,6 +100,28 @@ docker run -d -p PORT:PORT app-skeleton --host 0.0.0.0 --port PORT [OPTIONS]
 
 ## Model prediction example
 
+The model example consist on the classification of the iris dataset.
+The model is trained when the application starts such that there is no need training time lost when a user submits a new request (an idea here is to have a refresh endpoint which re-trains the model on demand with new data for example).
+
+By pressing the button `Abrakadabra` the prediction and other related information is generated, as the figures below show.
+
 <img src="app/static/iris_prediction.png" width="520">
 <img src="app/static/iris_insights.png" width="800">
 <img src="app/static/iris_performance.png" width="580">
+
+A similar post request can be made to the same endpoint returning a different reponse, in this case just the name of the class predicted. This is useful if you plan to make the API available to other applications. 
+This can be tested with the following example, by executing (if application is running on localhost)
+
+in the command line
+```bash
+curl --data "petal_length_cm=1&petal_width_cm=1&sepal_length_cm=1&sepal_width_cm=1" http://localhost:5000/iris-wizard
+```
+or in python
+```python
+request = {'petal_length_cm': 1,
+           'petal_width_cm': 1,
+           'sepal_length_cm': 1,
+           'sepal_width_cm': 1}
+requests.post('http://localhost:5000/iris-wizard', data=request).json()
+```
+
