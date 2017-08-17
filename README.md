@@ -1,6 +1,6 @@
 # app-skeleton
 
-Flask Python application example/skeleton/template, which can be run in production using Gunicorn.
+Flask Python application example/skeleton/template, which can be run in production using Gunicorn. It includes the corresponding Dockerfile example to easily containerize your application (check the **Docker** section).
 
 I am NOT a software developer nor do I want to be one. I think this skeleton can help transition from a machine learning model into a machine learning application, where end users (not data scientist or analysts) can actually make effective use of your model advice.
 
