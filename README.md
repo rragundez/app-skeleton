@@ -1,16 +1,18 @@
 # app-skeleton
 
-Python application example which can be run in production by using Gunicorn.
+Flask Python application example/skeleton/template, which can be run in production using Gunicorn.
 
 I am NOT a software developer nor do I want to be one. I think this skeleton can help transition from a machine learning model into a machine learning application, where end users (not data scientist or analysts) can actually make effective use of your model advice.
 
-The application demonstrates several uses, just pick and choose the parts depending on your specifications. Perhaps you are not interested in having a UI, then the endpoint example in the iris case (check the section **Model prediction example**) together with the Gunicorn extension of the Flask app is what you need.
+The application demonstrates several uses, just pick and choose the parts depending on your requirements. Perhaps you are not interested in having an UI, then the endpoint example in the iris case (check the section **Model prediction example**) together with the Gunicorn extension of the Flask app is what you need.
 
 There are two examples, the first is just a dummy example of how to ingest a user's input of different types. The second example runs a classifier which predicts the type of iris flower depending on input from a html form, it also provides some extra output related to the model used.
 
-The idea is to use these examples to easily customize your own python application. 
+The idea is to use these examples to easily customize your own Python application. 
 
 As you can see in the pictures I use the typical [shiny](https://shiny.rstudio.com/) layout, which in my opinion, is very practical for small machine learning applications.
+
+I do not use java script nor jquery, is only Python. Actually there is a very small javascript code on the submission of the form, this is to avoid sending empty inputs in the post request..
 
 <img src="app/static/dummy.png" width="700">
 
@@ -22,16 +24,17 @@ As you can see in the pictures I use the typical [shiny](https://shiny.rstudio.c
  - Interactive layout which generates output from the input forms.
  - Class wrapper to extend the Flask application using Gunicorn `app/resources/gunicorn_wrapper.py`.
  - Example class which handles the dummy form submission `app/resources/form_submitter_dummy.py`.
-  - Example class which handles the iris form submission `app/resources/form_submitter_iris.py`.
+ - Example class which handles the iris form submission `app/resources/form_submitter_iris.py`.
  - Function which runs a Flask application using Gunicorn, and handles multiple command line arguments `app/run_app.py`.
  - Folder with all necessary files for putting the application into a Docker container `docker`.
 
 ## Run application
 
-First install the `dummypackage` by executing:
+First install the `dummypackage` by executing
 ```bash
 python setup.py install
 ```
+Once you are building your own package you should keep a similar structure as best practice. You can read more about it (here)[https://blog.godatadriven.com/how-to-start-a-data-science-project-in-python].
 
 To run the application execute the command
 ```bash
