@@ -8,12 +8,6 @@ The application demonstrates several uses, just pick and choose the parts depend
 
 There are two examples, the first is just a dummy example of how to ingest a user's input of different types. The second example runs a classifier which predicts the type of iris flower depending on input from a html form, it also provides some extra output related to the model used.
 
-The idea is to use these examples to easily customize your own Python application. 
-
-As you can see in the pictures I use the typical [shiny](https://shiny.rstudio.com/) layout, which in my opinion, is very practical for small machine learning applications.
-
-I do not use java script nor jquery, is only Python. Actually there is a very small javascript code on the submission of the form, this is to avoid sending empty inputs in the post request..
-
 <img src="app/static/dummy.png" width="700">
 
 ## Contents
