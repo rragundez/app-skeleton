@@ -8,7 +8,7 @@ The application demonstrates several uses, just pick and choose the parts depend
 
 There are two examples, the first is just a dummy example of how to ingest a user's input of different types. The second example runs a classifier which predicts the type of iris flower depending on input from a html form, it also provides some extra output related to the model used.
 
-The idea is to use these examples to easily customize your own python application. 
+The idea is to use these examples to easily customize your own python application.
 
 As you can see in the pictures I use the typical [shiny](https://shiny.rstudio.com/) layout, which in my opinion, is very practical for small machine learning applications.
 
@@ -80,9 +80,9 @@ Inside the docker directory I have included a simple Dockerfile to build and run
 
 To build the docker image execute from the root diretory of this repository
 ```bash
-docker build --build-arg port=PORT -t app-skeleton -f docker/Dockerfile .
+docker build --build-arg port=PORT -t app-skeleton -f Dockerfile .
 ```
-where `PORT`should be replaced by the port number dedicated for your application. 
+where `PORT`should be replaced by the port number dedicated for your application.
 After building the image succesfully, you can run the container on the foreground by executing
 ```bash
 docker run -p PORT:PORT app-skeleton --host 0.0.0.0 --port PORT
@@ -109,7 +109,7 @@ By pressing the button `Abrakadabra` the prediction and other related informatio
 <img src="app/static/iris_insights.png" width="800">
 <img src="app/static/iris_performance.png" width="580">
 
-A similar post request can be made to the same endpoint returning a different reponse, in this case just the name of the class predicted. This is useful if you plan to make the API available to other applications. 
+A similar post request can be made to the same endpoint returning a different reponse, in this case just the name of the class predicted. This is useful if you plan to make the API available to other applications.
 This can be tested with the following example, by executing (if application is running on localhost)
 
 in the command line

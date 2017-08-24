@@ -13,7 +13,7 @@ LABEL maintainer=""
 #  - conda_env (name of conda environment in environment_docker.yml)
 
 # create virtual environment and clean leftovers
-COPY docker/environment_docker.yml /app-skeleton/environment_docker.yml
+COPY environment_docker.yml /app-skeleton/environment_docker.yml
 RUN conda env create -f /app-skeleton/environment_docker.yml && \
     conda clean --tarballs --packages -y
 
