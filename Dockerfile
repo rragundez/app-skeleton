@@ -28,6 +28,6 @@ ARG port
 EXPOSE $port
 
 # add package to python's path
-ENV PYTHONPATH $PYTHONPATH:/app-skeleton/dummypackage
+ENV PYTHONPATH $PYTHONPATH:/app-skeleton
 
 ENTRYPOINT ["/opt/conda/envs/conda_env/bin/python", "/app-skeleton/app/run_app.py"]
