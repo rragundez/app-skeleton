@@ -1,3 +1,7 @@
+# change default plotting backend for the complete application
+import matplotlib
+matplotlib.use('agg')
+
 from flask import Flask
 from flask import render_template
 
