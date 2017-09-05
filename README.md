@@ -24,7 +24,17 @@ There are two examples, the first is just a dummy example of how to ingest a use
 
 ## Run application
 
-First install the `dummypackage` by executing
+First create the python environment using conda
+```bash
+conda env create -f environment.yml
+```
+
+Then activate the environment
+```bash
+source activate appskeleton
+```
+
+ And install the `dummypackage` by executing
 ```bash
 python setup.py install
 ```
@@ -32,7 +42,7 @@ Once you are building your own package you should keep a similar structure as be
 
 To run the application execute the command
 ```bash
-python run_app.py [Options]
+python app/run_app.py [Options]
 ```
 where `Options` are a few of Gunicorn's possible optional settings. To see which settings can be specified execute `python app/run_app.py --help`. Except for the `--debug` argument (more in the **Run in debug mode** section), all others have a one-to-one relationship with a Gunicorn setting.
 
