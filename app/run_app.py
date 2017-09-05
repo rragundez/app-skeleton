@@ -74,7 +74,6 @@ from resources.gunicorn_app import GunicornApp
 )
 @click.option(
     '-u', '--user',
-    default=1000,
     help=("Switch worker processes to run as this user. Can be a valid "
           "user id or the name of a user. Defaults to 1000.")
 )
