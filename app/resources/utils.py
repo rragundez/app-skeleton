@@ -14,6 +14,7 @@ def pandas_plot_to_html(fig):
     img = io.BytesIO()
     fig.set_tight_layout(True)
     fig.savefig(img, format='png')
+    fig.clf()
     img_str = base64.b64encode(img.getvalue()).decode()
     html = '<img src="data:image/png;base64,{}"/>'.format(img_str)
     return html
